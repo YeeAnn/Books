@@ -63,3 +63,5 @@ Sales_item& Sales_item::operator+=(const Sales_item& rhs)
 	return *this;
 }
 ```
+
+小Tips：在编写`=`号的重载，要求`=`必须作为成员函数而存在
