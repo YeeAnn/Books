@@ -22,8 +22,7 @@ friend Sales_item operator+(const Sales_item& lhs, const Sales_item& rhs);
 public:
    
 	Sales_item():revenue(0.0), num(0){}
-	 Sales_item(const std::string &book):
-              bookNo(book), num(0), revenue(0.0) { }
+	 Sales_item(const std::string &book) : bookNo(book), num(0), revenue(0.0) { }
 
 public:
     Sales_item& operator+=(const Sales_item&);
