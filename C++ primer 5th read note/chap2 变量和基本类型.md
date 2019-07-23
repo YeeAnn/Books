@@ -36,10 +36,10 @@ const int * curErr = &errNum; //指针常量，指针可变，常量的值不可
 顶层`const`：指针本身是个常量
 底层`const`：指针所指的对象是个常量
 # 5. 处理类型
-`typedef:` 为类型取别名     `typedef double d`
-`using:`类似于`typedef`     `using d = double`
-`auto`:由初始值推断需要定义的变量的类型
-`decltype`:由表达式的类型推断出要定义的变量的类型，但是不使用该表达式的值来初始化变量
+- `typedef:` 为类型取别名     `typedef double d`
+- `using:`类似于`typedef`     `using d = double`
+- `auto`:由初始值推断需要定义的变量的类型
+- `decltype`:由表达式的类型推断出要定义的变量的类型，但是不使用该表达式的值来初始化变量
 
 
 
