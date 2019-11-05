@@ -42,5 +42,40 @@ public class Derived<T>:Base<string>
 3. 静态成员：
  泛型类的静态成员只能在类的一个实例中共享
  
- 
+ # chap6 数组
+ 1. Array 类
+  (1)CreateInstance()创建数组
+  (2)SetValue()\GetValue()
+  (3)Clone()
+    数组是引用类型，如果直接将两个数组赋值，将会得到两个引用。所以需要使用Clone将每个值进行赋值。如果数组中存储的是引用，使用Clone()也会将所有的引用赋值一遍。
+  (4)Copy()
+      Copy与Clone的区别在于，Copy必须要存在已知数组。
+  (5)Sort()
+  
+2. 枚举
+  (1)yield return:
+    不需要重新开辟内存
+  (2)foreach语句
+
+3. 元组Tuple
+
+# chap7 运算符和类型强制转换
+1. checked & unchecked运算符：
+  要不要执行类型检查
+  
+2. is 运算符：
+  检查对象是否与特定的类型相兼容
+  
+3. as 运算符：
+  用于执行引用类型的显示类型转换，如果类型兼容，则转换成功，如果类型不兼容，最后转换的结果为NULL
+  
+4. 可空类型：
+  int?  bool?
+  
+5. 空合并运算符：
+  ??
+  
+
+
+
  
