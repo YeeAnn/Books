@@ -57,6 +57,12 @@
 
 7.  接口：
   - 接口成员总是公有的
+  
+8. 可见性修饰符：
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
 # chap5 泛型
 1. 与C++的区别：
@@ -111,6 +117,13 @@ public class Derived<T>:Base<string>
 5. 空合并运算符：
   ??
   
+# chap8 委托，lambda表达式和事件
+1. 委托
+(1)定义：
+  `delegate`： `delegate void IntMethodInvoker(int x)`
+(2)使用：
+  
+
 
 
 
