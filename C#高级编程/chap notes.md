@@ -57,12 +57,11 @@
 
 7.  接口：
   - 接口成员总是公有的
-  
-8. 可见性修饰符：
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+
+8. 
+| 表格      | 第一列     | 第二列     |
+| ---------- | :-----------:  | :-----------: |
+| 第一行     | 第一列     | 第二列     |
 
 # chap5 泛型
 1. 与C++的区别：
@@ -121,6 +120,7 @@ public class Derived<T>:Base<string>
 1. 委托
 (1)定义：
   `delegate`： `delegate void IntMethodInvoker(int x)`
+  
 (2)使用：
   
 
