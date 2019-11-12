@@ -158,6 +158,8 @@ public class Derived<T>:Base<string>
   
 # chap9 字符串和正则表达式
 
+# chap10 集合
+  数组和Array类在定义时大小是固定的，如果元素的个数是动态的，应该使用集合类。List<T>,队列，栈，链表，字典和集
 
 
 
