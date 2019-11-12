@@ -152,9 +152,11 @@ public class Derived<T>:Base<string>
   - 如果lambda表达式有多条语句，必须添加花括号和return语句
   
 6. 事件
-  事件基于委托，为委托提供了一种发布\订阅机制，关键字： event
-  EventHandler<TEventArgs>:  事件委托
+  - 事件基于委托，为委托提供了一种发布\订阅机制，关键字： `event`
+  - EventHandler<TEventArgs>:  事件委托，第一个参数必须是object类型，第二个参数是T类型，且T必须派生自基类EventArgs
+  - 对于事件，可以使用add和remove关键字添加和删除委托的处理程序
   
+# chap9 字符串和正则表达式
 
 
 
