@@ -45,3 +45,68 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
     头文件和包含此头文件的程序代码文件位于同一个磁盘目录下
   - 使用尖括号：
     不在同一个目录下或者是认为是项目专属或者是标准的头文件
+
+
+# chap3 泛型编程风格
+1. STL主要由： 容器和泛型算法构成
+  - 容器： vector, list, set, map
+  - 泛型算法： find(), sort(), replace(), merge()等
+2. vector和array：
+  - vector可以是空的，array不可以
+  - vector和array都存在连续的内存上
+  - 尝试设计适用于vector和array的泛型find()函数，并将之拓展到list类型
+3. Iterator泛型指针
+  - 每个标准容器都提供有一个名为begin()的操作函数，可返回一个Iterator,指向第一个元素
+  - 提供一个名为end()的操作函数，返回一个Iterator,只想最后一个元素的下一个位置
+  - 可对Iterator进行赋值(assign)、比较(compare)、递增(increment)、提领(dereference)操作
+4. 所有容器都提供了四个函数：
+  - begin()
+  - end()
+  - erase()
+  - insert()
+5. 容器类的共通操作：
+  - equality() 和 ineauality()，返回值是true或者false
+  - assignment()，将某个容器赋值给另一个容器
+  - empty()容器中无任何元素时返回true
+  - size()返回容器内目前持有的元素的个数
+  - clear()删除容器中的所有的元素
+6. 使用顺序型容器：
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
