@@ -71,7 +71,19 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
   - size()返回容器内目前持有的元素的个数
   - clear()删除容器中的所有的元素
 6. 使用顺序型容器：
-
+  vector, deque, list
+  (1)vector, deque: 都是连续内存存储元素；
+  (2)list中每个元素包含三个字段：value, front指针，back指针
+  (3)顺序容器的五种定义方式：
+  - 产生空的容器：
+  `list<string slist>`
+  `vctor<int> ivec`
+  - 产生特定大小的容器，每个元素都以其默认值作为初值：
+  `list<int> ilist(1024)`
+  `vector<string> svec(32)`
+  - 产生特定大小的容器，为每个容器指定初始值
+  `vector<int> ivec(32, -1);`
+  - 通过一对iterator产生容器，
   
 
 
