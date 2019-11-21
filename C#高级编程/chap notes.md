@@ -137,10 +137,10 @@ public class Derived<T>:Base<string>
   - 给委托实例提供圆括号的与调用委托类的Invoke()方法完全相同
   - 使用委托的一种方式： 把方法整合到一组数组中，通过循环调用不同的方法
   - BeginInvoke()
-      Artical: Call a Method Asynchronously using Delegate BeginInvoke and EndInvoke Pattern
-          link: https://www.dotnetcurry.com/ShowArticle.aspx?ID=634
-      Artical: Call a Method Asynchronously in .NET using Polling Pattern and Callback Pattern      
-          link: https://www.dotnetcurry.com/ShowArticle.aspx?ID=642
+     - Artical: Call a Method Asynchronously using Delegate BeginInvoke and EndInvoke Pattern
+          - link: https://www.dotnetcurry.com/ShowArticle.aspx?ID=634
+     - Artical: Call a Method Asynchronously in .NET using Polling Pattern and Callback Pattern      
+          - link: https://www.dotnetcurry.com/ShowArticle.aspx?ID=642
 2. Action<T>
   不带返回值的委托
 3. Function<T>
