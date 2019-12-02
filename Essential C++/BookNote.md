@@ -95,7 +95,7 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
  - set由一群key组合而成，默认情形下，set皆依据其所属元素类型进行less-that排序存放
  - set中插入元素可使用inser()的一个参数形式，或者两个参数形式将某一个范围内的元素插入set
  - set中查找元素的方法，可使用cout
- - ?????是否有find()函数
+ - find()函数,如果没有找到，返回end()
  
  
 
