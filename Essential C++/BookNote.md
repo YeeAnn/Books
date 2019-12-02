@@ -84,93 +84,20 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
     - 产生特定大小的容器，为每个容器指定初始值
   `vector<int> ivec(32, -1);`
     - 通过一对iterator产生容器，
-```C++
-#include <iostream>
-#include <fstream>
-#include <set>
-#include <string>
-#include <map>
-
-using namespace std;
-
-void initialize_exclusion_set(set<string>&);
-void process_file(map<string, int>&, const set<string>&, ifstream&);
-void user_query(const map<string, int>&);
-void display_word_count(const map<string, int>&, ofstream &);
-
-int main()
-{
-	ifstream in_file("input_file.txt");
-	ofstream out_file("output_file.map");
-	if (!in_file || !out_file)
-	{
-		cerr << "fiele exsitence error" << endl;
-		return -1;
-	}
-
-	set<string> exclude_set;
-	initialize_exclusion_set(exclude_set);
-
-	map<string, int> word_count;
-	process_file(word_count, exclude_set, in_file);
-	user_query(word_count);
-	display_word_count(word_count, out_file);
-
-	return 0;
-}
-
-void initialize_exclusion_set(set<string>& exs)
-{
-	static string _excluded_words[3] = {"a", "an", "the"};
-	exs.insert(_excluded_words, _excluded_words+3);
-}
-
-void process_file(map<string, int>& word_cout, const set<string>& exclude_set, ifstream& infile)
-{
-	string word;
-	while (infile >> word)
-	{
-		if (exclude_set.count(word))
-		{
-			continue;
-		}
-		word_cout[word] += 1;
-	}
-}
-
-void user_query(const map<string, int>& word_count)
-{
-	string search_word;
-	cout << "Enter your word: " << endl;
-	cin >> search_word;
-	while (search_word.size() && search_word != "q")
-	{
-		map<string, int>::const_iterator it;
-		if ((it = word_count.find(search_word)) != (word_count.end()))
-		{
-			cout << "Yes.[" << it->first << ", " << it->second << "]" << endl;
-		}
-		else
-		{
-			cout << "No. press q to exit." << endl;
-		}
-		cin >> search_word;
-	}
-}
-
-void display_word_count(const map<string, int>& word_count, ofstream & outfile)
-{
-	map<string, int>::const_iterator it = word_count.begin(), end_it = word_count.end();
-	while (it != end_it)
-	{
-		outfile << "[" << it->first << ", " << it->second << "]" << endl;
-		++it;
-	}
-	outfile << endl;
-}
-
-```
-  
+7. 使用Map
+ - 使用map_test[key]的方式，如果key存在于map中，将会取出value,否则，会将key加入到这个map中
+ - map的迭代器指针对应的first元素为key,second元素为value
+ - 查询某个map中是否存在key有三种方式：
+	- 将key当成索引使用：缺点是当key不存在于这个map中的时候，key也会被自动加入map中，相应的key会被设置默认属性
+	- 使用map的find()函数，如果key存在其中，会返回一个iterator,指向key/value形成的一个pair，反之返回end()
+	- 使用map的count()函数，cout()会返回某固定项在map内的个数
+8. 使用Set
+ - set由一群key组合而成，默认情形下，set皆依据其所属元素类型进行less-that排序存放
+ - set中插入元素可使用inser()的一个参数形式，或者两个参数形式将某一个范围内的元素插入set
+ - set中查找元素的方法，可使用cout
+ - ?????是否有find()函数
+ 
+ 
 
 
 
