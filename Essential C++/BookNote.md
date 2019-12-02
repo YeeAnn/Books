@@ -84,8 +84,8 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
     - 产生特定大小的容器，为每个容器指定初始值
   `vector<int> ivec(32, -1);`
     - 通过一对iterator产生容器，
-    ```C++
-    #include <iostream>
+```C++
+#include <iostream>
 #include <fstream>
 #include <set>
 #include <string>
@@ -169,7 +169,7 @@ void display_word_count(const map<string, int>& word_count, ofstream & outfile)
 	outfile << endl;
 }
 
-    ```
+```
   
 
 
