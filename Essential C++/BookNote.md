@@ -94,10 +94,13 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 8. 使用Set
  - set由一群key组合而成，默认情形下，set皆依据其所属元素类型进行less-that排序存放
  - set中插入元素可使用inser()的一个参数形式，或者两个参数形式将某一个范围内的元素插入set
- - set中查找元素的方法，可使用cout
+ - set中查找元素的方法，可使用count
  - find()函数,如果没有找到，返回end()
  
- 
+9. Iterator Inserter
+- back_inserter()会以容器的push_back()函数取代assignment运算符。传入back_inserter的参数，应该是容器本身
+- inserter()会以容器的insert()来取代assignment运算符。接受两个参数，一个是容器，另一个是iterator,指向容器内的插入操作起点
+- front_inserter()会以容器的push_front()函数取代assignment运算符
 
 
 
