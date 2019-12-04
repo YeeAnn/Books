@@ -1,4 +1,5 @@
-chap3 将文件中单词存入map,并剔除个别单词，显示一份单词清单，并支持用户查询：
+chap3 
+- 将文件中单词存入map,并剔除个别单词，显示一份单词清单，并支持用户查询：
 ```C++
 #include <iostream>
 #include <fstream>
@@ -84,4 +85,142 @@ void display_word_count(const map<string, int>& word_count, ofstream & outfile)
 	outfile << endl;
 }
 
+```
+- 从文件中读取所有的家庭信息，存入map，家庭姓氏为key，孩子集合为value，允许用户根据姓氏来查询一个家庭的成员情况，并在最后打印map中的所有内容。
+```C++
+#include <iostream>
+#include <map>
+#include <vector>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+typedef vector<string> vstring;
+map<string, vstring> families;
+
+void populate_map(ifstream& namefile, map<string, vstring>& families)
+{
+	string textline;
+	while (getline(namefile, textline))
+	{
+		string fam_name;
+		vector<string> child;
+		string::size_type pos = 0, prev_pos = 0, textsize = textline.size();
+
+		while ((pos = textline.find_first_of(' ', pos)) != string::npos)
+		{
+			string::size_type len = pos - prev_pos;
+			if (! prev_pos)
+			{
+				fam_name = textline.substr(prev_pos, len);
+			}
+			else
+			{
+				child.push_back(textline.substr(prev_pos, len));
+			}
+			prev_pos = ++pos;
+		}
+		
+		//no child
+		if (prev_pos == 0)
+		{
+			fam_name = textline.substr(prev_pos, string::npos);
+			if (!families.count(fam_name))
+			{
+				vstring nochild = {};
+				families.insert({ fam_name, nochild});
+			}
+			
+			continue;
+		}
+		
+		//have child
+		if (prev_pos < textsize)
+			child.push_back(textline.substr(prev_pos, pos - prev_pos));
+		
+		if (!families.count(fam_name))
+		{
+			families[fam_name] = child;
+		}
+		else
+		{
+			cout << "family repeat." << endl;
+		}
+	}
+}
+
+
+void display_map(const map<string, vstring>& families, ostream& os)
+{
+	map<string, vstring>::const_iterator it = families.begin(), end_it = families.end();
+	while (it != end_it)
+	{
+		os << "The " << it->first << " family: ";
+		if (it->second.empty())
+		{
+			os << "no child" << endl;
+		}
+		else
+		{
+			os << "num: " << it->second.size() << ", ";
+			vstring::const_iterator it_c = it->second.begin(), ite_c = it->second.end();
+			while (it_c != ite_c)
+			{
+				cout << *it_c << ", ";
+				++it_c;
+			}
+			cout << endl;
+		}
+		++it;
+	}
+}
+
+void query_map(const map<string, vstring>&families, const string& family)
+{
+	map<string, vstring>::const_iterator it = families.find(family);
+	if (it == families.end())
+	{
+		cout << "The " << family << " has no record." << endl;
+		return;
+	}
+	cout << "The " << family << " has " << it->second.size() << " children: ";
+
+	vector<string>::const_iterator it_c = it->second.begin(), ite_c = it->second.end();
+	while (it_c != ite_c)
+	{
+		cout << *it_c << ", ";
+		++it_c;
+	}
+	cout << endl;
+
+}
+
+int main()
+{
+	map<string, vstring> families;
+	ifstream namefile("input_file.txt");
+	if (!namefile)
+	{
+		cerr << "file not exist" << endl;
+		return -1;
+	}
+
+	populate_map(namefile, families);
+	string name;
+	while (true)
+	{
+		cout << "enter family name: " << endl;
+		cin >> name;
+		if (name == "q")
+		{
+			break;
+		}
+		query_map(families, name);
+	}
+
+	display_map(families, cout);
+
+	return 0;
+}
 ```
