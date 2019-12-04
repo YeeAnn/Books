@@ -106,6 +106,7 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 - inserter()会以容器的insert()来取代assignment运算符。接受两个参数，一个是容器，另一个是iterator,指向容器内的插入操作起点
 - front_inserter()会以容器的push_front()函数取代assignment运算符
 
+# chap4 基于对象的编程风格
 
 
 
