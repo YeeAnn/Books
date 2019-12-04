@@ -87,8 +87,8 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 7. 使用Map
  - 使用map_test[key]的方式，如果key存在于map中，将会取出value,否则，会将key加入到这个map中
  - insert
- 	`iterator map_name.insert({key, element})\\初始化列表`
-	`iterator map_name.insert(it_begin, it_end)\\一对迭代器`
+ 	- `iterator map_name.insert({key, element})\\初始化列表`
+	- `iterator map_name.insert(it_begin, it_end)\\一对迭代器`
  - map的迭代器指针对应的first元素为key,second元素为value
  - 查询某个map中是否存在key有三种方式：
 	- 将key当成索引使用：缺点是当key不存在于这个map中的时候，key也会被自动加入map中，相应的key会被设置默认属性
