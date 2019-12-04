@@ -86,6 +86,9 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
     - 通过一对iterator产生容器，
 7. 使用Map
  - 使用map_test[key]的方式，如果key存在于map中，将会取出value,否则，会将key加入到这个map中
+ - insert
+ 	`iterator map_name.insert({key, element})\\初始化列表`
+	`iterator map_name.insert(it_begin, it_end)\\一对迭代器`
  - map的迭代器指针对应的first元素为key,second元素为value
  - 查询某个map中是否存在key有三种方式：
 	- 将key当成索引使用：缺点是当key不存在于这个map中的时候，key也会被自动加入map中，相应的key会被设置默认属性
@@ -96,6 +99,7 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
  - set中插入元素可使用inser()的一个参数形式，或者两个参数形式将某一个范围内的元素插入set
  - set中查找元素的方法，可使用count
  - find()函数,如果没有找到，返回end()
+ - insert类似与map，关联容器的插入操作都是相似的
  
 9. Iterator Inserter
 - back_inserter()会以容器的push_back()函数取代assignment运算符。传入back_inserter的参数，应该是容器本身
