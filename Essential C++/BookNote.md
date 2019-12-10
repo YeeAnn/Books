@@ -107,7 +107,15 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 - front_inserter()会以容器的push_front()函数取代assignment运算符
 
 # chap4 基于对象的编程风格
-
+1. class的定义：
+- 主体部分由一对大括号括住，以分号结尾；
+- 主体内的两个关键字`private`和`public`
+2. 构造函数
+- 成员初始化列表：紧跟在参数列表之后的冒号里面，以逗号分隔，欲赋值的源数据放在变量后面的小括号中
+- 可重载
+- 拷贝构造函数：成员需要逐一初始化
+3. 析构函数
+- 以~开头，无返回值，无参数列表
 
 
 
