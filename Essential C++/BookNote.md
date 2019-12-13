@@ -116,6 +116,8 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 - 拷贝构造函数：成员需要逐一初始化
 3. 析构函数
 - 以~开头，无返回值，无参数列表
+4. mutable和const
+
 
 
 
