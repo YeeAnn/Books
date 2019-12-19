@@ -126,10 +126,14 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
   
   -this指针
   
-  - 静态类成员
-
-
-
+  ## 4.1 静态类成员
+- 类数据成员
+	- 表示唯一的、共享的member
+	- 需要在代码文件中提供其清楚的定义，定义时可以给定初值或者不给初值
+	- 也可以在定义的时候直接给定初值
+- 类成员函数
+	- 在不访问任何non-static member的条件下能够被声明为static
+在类的主体之外定义静态数据成员和函数的时候，无需重复加上static关键字
 
 
 
