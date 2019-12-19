@@ -117,7 +117,16 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 3. 析构函数
 - 以~开头，无返回值，无参数列表
 4. mutable和const
-	       
+ - const member function
+  有些时候希望函数调用不会更改变量的值，除了将变量的值声明为const类型之外，还有一种保险方式是将调用这个变量的相关函数声明为const类型。即在member function上标注const，告诉编译器，这个member function不会更改class object的内容。
+  - 语法： const修饰符紧跟在函数参数列表之后
+  - 声明和定义：如果不是在类中实现，那么在声明和定义中需要同时制定const
+  - const member function函数返回一个非const引用或者变量，在语法层面上是存在问题的，这种时候，需要对这种情况下的函数进行重载，因为函数重载可以根据const或者非const进行区分
+  - mutale
+  
+  -this指针
+  
+  - 静态类成员
 
 
 
