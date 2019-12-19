@@ -117,7 +117,7 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 3. 析构函数
 - 以~开头，无返回值，无参数列表
 4. mutable和const
-
+	       
 
 
 
