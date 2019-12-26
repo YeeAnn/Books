@@ -5,3 +5,5 @@ hello there, this is a new guy who want to learn something about C++, maybe abou
   https://guides.github.com/activities/hello-world/
   
   1. C++ primer 5th  read note
+- books about C++
+  https://github.com/tmpbooks/cpp
