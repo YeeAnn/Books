@@ -134,7 +134,11 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 - 类成员函数
 	- 在不访问任何non-static member的条件下能够被声明为static
 在类的主体之外定义静态数据成员和函数的时候，无需重复加上static关键字
-
+- 运算符重载
+ - operator
+- 友元
+	- 任何class都可以将其他的function或者class指定为friend，所谓friend，具备了与class member function相同的访问权限，可以访问class的private member
+	- 声明时可以放在类中任意地方，不受private或者public等修饰符影响
 
 
 
