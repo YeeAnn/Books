@@ -140,6 +140,7 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 	- 任何class都可以将其他的function或者class指定为friend，所谓friend，具备了与class member function相同的访问权限，可以访问class的private member
 	- 声明时可以放在类中任意地方，不受private或者public等修饰符影响
 
+# chap5 面向对象编程风格
 
 
 
