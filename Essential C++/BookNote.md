@@ -141,7 +141,73 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 	- 声明时可以放在类中任意地方，不受private或者public等修饰符影响
 
 # chap5 面向对象编程风格
+## 1. C++的几大特征
+1.继承
+	父类定义了子类所有的共有接口和父类自己的私有实现。每个子类可以增加或者继承而来的东西，实现其自身独特的行为。
+2.多态
+	让基类的指针或者引用十分透明的指向任何一个派生类的对象。
+3.动态绑定
+	只有在程序运行的时候才会决定调用父类还是子类的函数
 
+## 2. 虚析构函数
+1. 当程序定义一个派生对象，基类和派生类的constructor都会被执行。当派生类对象被销毁的时候，他们的destructor也都会被执行，但是顺序相反。
+2. 设计的程序里，释放实例对象的时候，如果有【使用某个基类的指针，来释放它指向的继承类的实例】这种用法的话，那么，这个基类的destructor应该设计成virtual的。
+	如果是一个继承树，只要在树根基类上声明虚析构函数就好。剩下的类自然继承虚析构函数。
+```C++
+class A
+{
+public:
+  A(int size): m_a_size(size)
+  {
+    m_a = new int[size];
+  }
+  ~A();
+private:
+  int *m_a;
+  int m_a_size;
+};
+
+A::~A()
+{
+    cout << "delete m_a" << endl;
+    delete []m_a;
+}
+
+class B: public A
+{
+public:
+  B(int a_size, int b_size): A(a_size), m_b_size(b_size)
+  {
+    m_b = new int[b_size];
+  }
+  ~B();
+private:
+  int *m_b;
+  int m_b_size;
+};
+
+B::~B()
+{
+    cout << "delete m_b" << endl;
+    delete []m_b;
+}
+int main()
+{
+  A* a = new B(5,10);
+  delete a;
+  return 0;
+}
+
+作者：sethbrin
+链接：https://www.zhihu.com/question/41538182/answer/91407683
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+运行结果：
+`delete m_a`
+虚构函数添加virtual 运行结果:
+`delete m_b
+delete m_a`
 
 
 
