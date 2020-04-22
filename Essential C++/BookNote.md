@@ -234,8 +234,32 @@ delete m_a`
 	3. 实例：  
 	
 # chap6 以Template进行编程
+## 1. 前置声明
+```C++
+template <typename T>
+class BTnote;
+```
 
+## 2.直接声明
+```C++
+template <typename T>
+class BTnote
+{
 
+};
+```
+
+## 3.模板类的实例化
+`BTnote<int> bti;`
+
+# 7.异常处理
+## 1. throw
+	C++通过throw表达式抛出异常，异常是某种对象。
+## 2. catch
+- 可以利用一条或者多条catch子句来catch被抛出的异常。异常对象类型会拿来与每一个catch子句进行对比，如果类型符合，那么该catch子句的的内容便会被执行。
+- 有时无法在一个catch子句中完成所有的处理，需要借助第二个catch子句，也就是需要重新将这个异常抛出来。那么只需在字句中添加`throw`即可。这种情况只能出现在catch子句中
+- 如果需要捕获任何类型的异常，可使用`catch(...)`的方式
+## 3.局部资源管理
 
 
 
