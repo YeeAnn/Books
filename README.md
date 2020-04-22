@@ -7,3 +7,6 @@ hello there, this is a new guy who want to learn something about C++, maybe abou
   1. C++ primer 5th  read note
 - books about C++
   https://github.com/tmpbooks/cpp
+  
+  The Algorithms - C-plus-plus
+  https://github.com/TheAlgorithms/C-Plus-Plus
