@@ -231,7 +231,7 @@ delete m_a`
 	- 基类指针指向子类对象：  
 	1. 实现多态的调用时可以直接这么使用；  
 	2. 如果使用这个指针调用子类的protected函数，或者父类中没有定义的函数，需要将父类指针使用智能指针转换为子类指针。  
-	3. 实例：  
+	3. 实例：  dynamic_cast   https://www.cnblogs.com/chio/archive/2007/07/18/822389.html
 	
 # chap6 以Template进行编程
 ## 1. 前置声明
@@ -260,6 +260,32 @@ class BTnote
 - 有时无法在一个catch子句中完成所有的处理，需要借助第二个catch子句，也就是需要重新将这个异常抛出来。那么只需在字句中添加`throw`即可。这种情况只能出现在catch子句中
 - 如果需要捕获任何类型的异常，可使用`catch(...)`的方式
 ## 3.局部资源管理
+智能指针
+在异常处理机制终结某个函数之前，C++保证，函数中所有局部对象的destructor都会被调用。因此局部对象使用new分配符得到空间时，应该考虑使用智能指针。否则，如果在进入delete之前，中间代码由于异常中断、函数退出，这样的话就会造成内存泄漏。参考如下：
+```C++
+extern Mutex m;
+void f()
+{
+	//请求资源
+	int *p = new int;
+	m.acquire();
+	
+	process(p); //代码有可能因为异常在此处退出，从而造成内存泄漏，所以可考虑使用智能指针
+	
+	//释放资源
+	m.release();
+	delete p;
+}
+```
+## 4.标准异常
+- 标准库定义了一套异常类体系，其根部是名为exception的抽象基类。exception声明有一个what()函数，会返回一个const char*,用以表示抛出异常的文字描述。
+- 我们可以将自己编写的异常库融入exception类体系。这样可以被任何打算捕获抽象基类的exception的程序代码块捕获。例如，以下的代码片会捕获所有的exception派生类的异常信息：
+```C++
+catch(const exception &ex)
+{
+	cerr << ex.what() << endl;
+}
+```
 
 
 
