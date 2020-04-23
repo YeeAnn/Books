@@ -1,6 +1,6 @@
 
 # chap2 面向过程的编程风格
-1. pass by reference
+## 1. pass by reference
   - 定义
   ```C++
   int ival = 1024;
@@ -13,18 +13,18 @@
   - 和指针的区别：
     - 指针需要做安全性检查
  
- 2. 动态内存管理：
+ ## 2. 动态内存管理：
   - 从堆上分配内存；
   - 使用news申请内存，使用delete进行内存释放
     `eg: int *pi = new int[24];`
         `delete [] pi`
 
-3. 提供默认参数值：
+## 3. 提供默认参数值：
   可以为函数形参提供默认参数值
   
-4. inline函数和函数重载
+## 4. inline函数和函数重载
 
-5. 函数模板：
+## 5. 函数模板：
 ```C++
 template <typename elemType>
 void Dis_message(const string& msg, const vector<elemType> &vec)
@@ -38,13 +38,33 @@ void Dis_message(const string& msg, const vector<elemType> &vec)
 }
 ```
 
-6. 函数指针
+## 6. 函数指针
 
-7. 头文件：
+## 7. 头文件：
   - 使用双引号：
     头文件和包含此头文件的程序代码文件位于同一个磁盘目录下
   - 使用尖括号：
     不在同一个目录下或者是认为是项目专属或者是标准的头文件
+
+## 8.文件的读写
+### 8.1 头文件
+如果需要对文件进行读写，需要包含头文件`#include <fstream>`
+### 8.2 输出文件
+如果是打开一个可供输出的文件，可以定义一个`ofstream`对象。
+`ofstream outfile("filepath.txt")`
+此时，若指定的文件不存在，便会有一个文件被产生出来以供输出使用。如果文件存在，这个文件会被打开用作输出，而文件中的原有数据会被丢弃。
+`ofstream outfile("filepath.txt", ios_base::app)`
+这种方式表示以追加的方式打开这个文件
+`if(! outfile)`
+由于文件打开可能会失败，因此在写入之前，需要判断对象是否为空
+### 8.3 输入文件
+如果打开一个可供读取的文件，可以定义一个`ifstream`对象
+`ifstream infile("filepath.txt")`
+如果未能成功打开，该infile对象就是false，如果成功的打开，改文件的写入位置会被设定在起始处。
+`string name; while(infile >> name)//按照行数挨个读取文件的内容`
+
+### 8.4 同时读写文件
+如需要同时读写一个文件，定义fstream对象，可考虑使用追加模式打开。
 
 
 # chap3 泛型编程风格
