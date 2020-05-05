@@ -10,3 +10,6 @@ hello there, this is a new guy who want to learn something about C++, maybe abou
   
   The Algorithms - C-plus-plus
   https://github.com/TheAlgorithms/C-Plus-Plus
+  
+ - github grammer:
+ https://help.github.com/cn/github/writing-on-github/basic-writing-and-formatting-syntax
