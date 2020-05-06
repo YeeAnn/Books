@@ -52,6 +52,15 @@ class TextBook
 可使用成员初始化列表实现变量的初始化
 - 为避免“跨编译单元之初始化次序”的问题，请以Local static对象替换non-local static对象   *其中涉及的单例模式和和线程安全的问题不是很清晰*
 
+# 5. 了解C++默默编写并调用了哪些函数
+编译器可以为class创建default构造函数、copy构造函数、copy assignment操作符、析构函数。  
+至于copy构造函数和copy assignment操作符，编译器创建的版本只是单纯的将来源对象的每一个non-static成员变量拷贝到目标对象。 *static的成员变量是如何处理的*  
+如果打算在内含reference 成员或者const成员的class内支持赋值操作，需要手动实现这个功能。   C++不允许reference改变成指向不同的对象
+
+# 6. 若不想使用编译器自动生成的函数，就应该明确拒绝
+为驳回编译器自动提供的机能。可将相应的成员函数声明为private并且不予实现。使用像uncopyable这样的base class也是一种做法。
+
+# 7. 为多态基类声明virtual析构函数
 
 
 
