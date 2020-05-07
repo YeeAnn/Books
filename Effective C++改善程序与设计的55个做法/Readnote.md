@@ -61,6 +61,15 @@ class TextBook
 为驳回编译器自动提供的机能。可将相应的成员函数声明为private并且不予实现。使用像uncopyable这样的base class也是一种做法。
 
 # 7. 为多态基类声明virtual析构函数
+polymorphic（带多态性质的）base class 应该声明一个virtual析构函数，如果class带有任何的virtual函数，它就应该拥有一个virtual析构函数。  
+classes的设计目的如果不是为了作为base class使用，或者不是为了具备多态性（polymorphically）,就不应该声明virtual析构函数。（*因为会增加对象的体积大小*）  
+虚函数表：属于类。不同的编译环境存放的位置不同  
+虚指针：属于每个对象，指向虚函数表  
+参考链接： https://blog.csdn.net/qq_28584889/article/details/88756022
+
+# 8. 别让异常逃离析构函数
+
+
 
 
 
