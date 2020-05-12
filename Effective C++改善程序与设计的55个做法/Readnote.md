@@ -68,9 +68,32 @@ classes的设计目的如果不是为了作为base class使用，或者不是为
 参考链接： https://blog.csdn.net/qq_28584889/article/details/88756022
 
 # 8. 别让异常逃离析构函数
+1. 析构函数绝对不要吐出异常。如果一个被析构函数调用的函数函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下（不传播）它们或者结束程序。  
+2. 如果客户需要对某个操作函数运行期间抛出的异常做出反应，那么class应该提供一个普通函数（而非在析构函数中）执行该操作。
 
+# 9. 绝不在构造和析构过程中调用virtual函数
+在构造和析构函数中不要调用virtual函数，因为这类调用从不下降至derived class（比起当前执行构造函数和析构函数那层），这样会造成意想不到的结果。
 
-
+# 10. 令operator=返回一个 reference to `*this`
+令赋值操作符返回一个reference to `*this`,以保证赋值运算符的传递性
+```C++
+class Wight
+{
+public:
+    Wight& operator=(const Wight& rh)
+    {
+        ......
+        return *this;
+    }
+	Wight& operator=(int rhs) 
+    {
+        ....
+        return *this;
+    }
+    
+    
+};
+```
 
 
 
