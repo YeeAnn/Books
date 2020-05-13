@@ -53,7 +53,7 @@ class TextBook
 - 为避免“跨编译单元之初始化次序”的问题，请以Local static对象替换non-local static对象   **其中涉及的单例模式和和线程安全的问题不是很清晰**
 
 # 5. 了解C++默默编写并调用了哪些函数
-编译器可以为class创建default构造函数、copy构造函数、copy assignment操作符、析构函数。  
+编译器可以为class创建default构造函数、copy构造函数、copy assignment操作符(operator =)、析构函数。  
 至于copy构造函数和copy assignment操作符，编译器创建的版本只是单纯的将来源对象的每一个non-static成员变量拷贝到目标对象。 **static的成员变量是如何处理的**  
 如果打算在内含reference 成员或者const成员的class内支持赋值操作，需要手动实现这个功能。   C++不允许reference改变成指向不同的对象
 
@@ -85,7 +85,7 @@ public:
         ......
         return *this;
     }
-	Wight& operator=(int rhs) 
+    Wight& operator=(int rhs) 
     {
         ....
         return *this;
@@ -94,6 +94,52 @@ public:
     
 };
 ```
+# 11.在operator=中处理“自我赋值”
+确保当对象自我赋值时operator=有良好的行为。其中的技术包括比较“来源对象”和“目标对象”的地址，精心周到的语句顺序，以及copy-and-swap
+- 比较“来源对象”和“目标对象”
+```C++
+Widget& Widget::operator=(const Widget& rhs)
+{
+	if(this == &rhs)
+		return *this;  //证同测试，防止自己给自己赋值之前，删除了自己的对象
+	delete pb;
+	pb = new Bitmap(*rhs.pb); //但仍然存在异常安全问题
+	return *this;
+}
+```
+- “精心周到的语句”
+```C++
+Widget& Widget::operator=(const Widget& rhs)
+{
+	Bitmap *pOrigin = pb; //首先保存原来的pb指针
+	pb = new Bitmap(*rhs.pb);//令pb指向*pb的一个复件
+	delete pOrigin;       //删除原先的pb
+	return *this;
+}
+```
+确定任何函数如果操作一个以上的对象，而其中多个对象是同一个对象时，其行为仍然正确
+
+# 12. 复制对象时勿忘其每一个成分
+copying函数应该应该确保复制“对象内的所有成员变量”及所有的“base class”成分，在派生类中调用父类的拷贝函数：`Customer::oprator=(rhs)`  
+不要尝试以某个copying函数实现另一个copying函数，应该将共同机能放进第三个函数中，并由两个copying函数共同调用  
+
+# 13.以对象管理资源
+工厂函数和自定义构造函数： https://juejin.im/post/5d42a3c95188255d3a0f08bb  
+1. 为防止资源泄露，请使用RAII对象，它们在构造函数中获取资源并在析构函数中释放资源；  
+2. 两个常被使用的RAII class分别是shared_ptr和auto_ptr,前者通常是比较佳的选择，因为其copy行为比较直观。若选择auto_ptr,复制动作会使它（被复制物）指向NULL。  
+Tips: auto_ptr和shared_ptr在其析构函数中调用的都是delete而不是delete[],这意味着动态分配得到的array身上使用auto_ptr或者shared_ptr是个馊主意，虽然它可以通过编译。对于这种动态数组，可以使用boost::scoped_array和boost::shared_array   class
+
+# 14.在资源管理类中小心copying的行为
+
+
+
+
+
+
+
+
+
+
 
 
 
