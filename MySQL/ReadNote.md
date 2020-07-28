@@ -53,6 +53,23 @@ SELECT Xcolumn FROM Xtable WHERE Xcolumn = XValue OR Xcolumn = XValue  /* 如果
 SELECT Xcolumn FROM Xtable WHERE Xcolumn IN (XValue, YValue) ORDER BY YColumn /* 选取在XValue和YValue的记录并且排序 */
 SELECT Xcolumn FROM Xtable WHERE Xcolumn NOT IN (XValue, YValue) ORDER BY YColumn  /* 选取记录不在在XValue和YValue的记录并且排序 */
 ```
-## 6
+## 6 通配符
+在搜索子句中使用通配符必须要使用LIKE操作符
+### 6.1 `%`
+`%`可以匹配0个或者多个字符
+```MYSQL
+SELECT Xcolumn FROM Xtable WHERE Xcolumn LIKE 'jet%' /* 搜索所有以jet开头的Xcolumn记录 */
+SELECT Xcolumn FROM Xtable WHERE Xcolumn LIKE '%jet%' /* 搜索所有包含jet的Xcolumn记录 */
+SELECT Xcolumn FROM Xtable WHERE Xcolumn LIKE 'j%et'
+```
+### 6.2 `_`
+`_`通配符的使用方式和`%`一样，但是`_`只能匹配单个字符而不是多个字符
 
+## 7. 正则表达式
+```MYSQL
+SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP '1000' /* 与文本正文1000匹配的一个正则表达式 */
+SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP '.000' /* .是正则表达式中特殊字符，表示匹配任意一个字符。*/
+SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP '1000 | 2000' /* 与文本正文1000或者2000匹配的一个正则表达式 */
+
+```
 
