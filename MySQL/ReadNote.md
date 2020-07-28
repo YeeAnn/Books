@@ -29,3 +29,30 @@ SELECT Xcolumn FROM Xtables ORDER BY Xcolumn DESC; /* 按照Xcolumn降序排序�
 ```
 
 ## 4. WHERE
+```MYSQL
+SELECT Xcolumn FROM Xtable WHERE Xcolumn = XValue 
+SELECT Xcolumn FROM Xtable WHERE Xcolumn BETWEEN XValue AND YValue   /* 选取值在X,Y之间的记录 */
+SELECT Xcolumn FROM Xtable WHERE Ycolumn IS NULL;  /* 选取为空的记录 */
+
+```
+|  操作符   | 说明  |
+|  ----  | ----  |
+| =  | 等于 |
+| <>  | 不等于 |
+| ！=  | 不等于 |
+| <  | 小于 |
+| <=  | 小于等于 |
+| >  | 大于 |
+| >=  | 大于等于 |
+| BETWEEN  | 在指定的两个值之间 |
+
+## 5. AND OR IN NOT
+```MYSQL
+SELECT Xcolumn FROM Xtable WHERE Xcolumn = XValue  AND Ycolumn < YValue
+SELECT Xcolumn FROM Xtable WHERE Xcolumn = XValue OR Xcolumn = XValue  /* 如果混合使用AND OR，AND的优先级更高一些 */
+SELECT Xcolumn FROM Xtable WHERE Xcolumn IN (XValue, YValue) ORDER BY YColumn /* 选取在XValue和YValue的记录并且排序 */
+SELECT Xcolumn FROM Xtable WHERE Xcolumn NOT IN (XValue, YValue) ORDER BY YColumn  /* 选取记录不在在XValue和YValue的记录并且排序 */
+```
+## 6
+
+
