@@ -70,6 +70,21 @@ SELECT Xcolumn FROM Xtable WHERE Xcolumn LIKE 'j%et'
 SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP '1000' /* 与文本正文1000匹配的一个正则表达式 */
 SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP '.000' /* .是正则表达式中特殊字符，表示匹配任意一个字符。*/
 SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP '1000 | 2000' /* 与文本正文1000或者2000匹配的一个正则表达式 */
+SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP '[abc]' /* []内定义一组字符，表示包含其中的任意一个就可以，类似于or的汉语a|b|c */
+SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP '[0-9]' /* 匹配0~9内的所有数字，只要包含其中一个就可以 */
+SELECT Xcolumn FROM Xtable WHERE Xcolumn REGEXP  '\\.'  /* 匹配含.的所有内容，对于特殊字符，需要加上\\进行转义 */
+```
+`REGEXP`之后的内容为正则表达式
+ -- 匹配字符类
+ -- 匹配多个实例
+ -- 定位符
 
+## 8.创建计算字段
+### 8.1 拼接字段
+`concat`拼接串，把多个串链接起来形成一个较长的串。
+```MYSQL
+SELECT Concat(Xcolumn, '(', Ycolumn, ')')  /* 最后输出Xcolumn(Ycolumn),但是新的列没有名字 */
+SELECT Concat(Xcolumn, '(', Ycolumn, ')') AS Xtitle  /* 最后输出Xcolumn(Ycolumn),并且新的列的名字是Xtitle */
 ```
 
+# 9.使用数据处理函数
