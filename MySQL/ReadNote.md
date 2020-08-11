@@ -87,4 +87,30 @@ SELECT Concat(Xcolumn, '(', Ycolumn, ')')  /* 最后输出Xcolumn(Ycolumn),但�
 SELECT Concat(Xcolumn, '(', Ycolumn, ')') AS Xtitle  /* 最后输出Xcolumn(Ycolumn),并且新的列的名字是Xtitle */
 ```
 
-# 9.使用数据处理函数
+## 9.使用数据处理函数
+### 9.1 用于处理字符串的文本函数（删除，填充，转换大小写）
+```MYSQL
+SELECT Xcolumn, Upper(Ycolumn) AS Xtitle FROM Xtable /* 选取Xcolumn， Ycolumn， 将Ycolumn转换成大写，并且重命名为Xtitle */
+```
+常用的文本处理函数：
+|  函数   | 说明  |
+|  ----  | ----  |
+| Left() | 返回串左边的字符 |
+| Length() | 返回串的长度 |
+| Locate() | 找出串的一个子串 |
+| Lower() | 将串转换为小写 |
+| LTrim() | 去掉串左边的空格 |
+| Right() | 返回串右边的字符 |
+| RTrim() | 去掉串右边的空格 |
+| Soundex() | 返回串的SOUNDEX的值 |
+| SubString() | 返回子串的字符 |
+| Upper() | 将串转换为大写 |
+
+### 9.2 在数值数据上进行算术操作（返回绝对值，进行代数运算）
+
+### 9.3 处理日期和时间值并从这些值中提取特定成分
+
+### 9.4 返回DBMS的相关信息的系统函数
+
+
+
