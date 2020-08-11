@@ -107,10 +107,91 @@ SELECT Xcolumn, Upper(Ycolumn) AS Xtitle FROM Xtable /* 选取Xcolumn， Ycolumn
 | Upper() | 将串转换为大写 |
 
 ### 9.2 在数值数据上进行算术操作（返回绝对值，进行代数运算）
+|  函数   | 说明  |
+|  ----  | ----  |
+|Abs()| 返回一个数的绝对值|
+|Cos()| 返回一个角度的余弦|
+|Exp()| 返回一个数的指数值|
+|Mod()| 返回除操作的余数|
+|Pi()| 返回圆周率|
+|Rand()| 返回一个随机数|
+|Sin()| 返回一个角度的正弦|
+|Sqrt()| 返回一个数的平方根|
+|Tan()| 返回一个角度的正切|
 
 ### 9.3 处理日期和时间值并从这些值中提取特定成分
+|  函数   | 说明  |
+|  ----  | ----  |
+|AddDate()| 增加一个日期（天、周等）|
+|AddTime()| 增加一个时间（时、分等）|
+|CurDate() |返回当前日期|
+|CurTime() |返回当前时间|
+|Date() |返回日期时间的日期部分|
+|DateDiff() |计算两个日期之差|
+|Date_Add() |高度灵活的日期运算函数|
+|Date_Format() |返回一个格式化的日期或时间串|
+|Day() |返回一个日期的天数部分|
+|DayOfWeek() |对于一个日期，返回对应的星期几|
+|Hour() |返回一个时间的小时部分|
+|Minute()| 返回一个时间的分钟部分|
+|Month() |返回一个日期的月份部分|
+|Now() |返回当前日期和时间|
+|Second()| 返回一个时间的秒部分|
+|Time() |返回一个日期时间的时间部分|
+|Year() |返回一个日期的年份部分|
 
 ### 9.4 返回DBMS的相关信息的系统函数
+
+## 10. 汇总函数
+|  函数   | 说明  |
+|  ----  | ----  |
+|AVG()| 返回某列的平均值|
+|COUNT()| 返回某列的行数|
+|MAX()| 返回某列的最大值|
+|MIN()| 返回某列的最小值|
+|SUM()| 返回某列值之和|
+
+-- `AVG()`
+通过对表中的行数计数并计算特定列的值
+```MYSQL
+SELECT AVG(Xcolumn) AS XTitle From XTables; /* 返回XTables中的XColumn的平均值，并且重命名为XTitle */
+SELECT AVG(Xcolumn) AS XTitle From XTables WHERE Ycolumn = YValue;
+SELECT COUNT(*) FROM XTables; /* 统计XTables中所有column数，不管表列中包含的，一般而言，count(*)不可以再仅仅只是搭配普通的column组放在select里使用，普通的column需要加上GROUP BY或者聚合函数才可以，也就是 SELECT XColumn, COUNT(*) FROM XTables; 这是不合法的语句*/
+SELECT COUNT(Xcolumn) FROM XTables; /*统计XTables中所有记录中包含Xcolumn的数目，*/
+SELECT MAX(Xcolumn)  AS Xtitle FROM XTables; /* 统计XTables中Xcolumn列中的最大值， MAX函数忽略值为NULL的行 */
+SELECT AVG(DISTINCT Xcolumn) AS XTitle From XTables; /* 返回XTables中的XColumn不重复的值的平均值，并且重命名为XTitle */
+SELECT COUNT(*) AS XTitle,
+       MIN(XColumn) AS YTitle,
+       MAX(XColumn) AS ZTitle,
+       AVG(XColumn) AS TTitle
+FROM XTables;   /*可以在一条语句中使用多个聚集函数*/
+```
+
+## 11. 分组数据
+### 11.1 GROUP BY
+```MYSQL
+SELECT XColumn, COUNT(*) AS XTitle FROM XTable GROUP BY XColumn; /* 对每个XColumn值进行分组，计数，计数结果的列重命名为XTitle */
+```
+-- GROUP BY子句可以包含任意数目的列。这使得能对分组进行嵌套，为数据分组提供更细致的控制。
+-- 如果在GROUP BY子句中嵌套了分组，数据将在最后规定的分组上进行汇总。换句话说，在建立分组时，指定的所有列都一起计算（所以不能从个别的列取回数据）。
+-- GROUP BY子句中列出的每个列都必须是检索列或有效的表达式（但不能是聚集函数）。如果在SELECT中使用表达式，则必须在GROUP BY子句中指定相同的表达式。不能使用别名。
+-- 除聚集计算语句外，SELECT语句中的每个列都必须在GROUP BY子句中给出。
+-- 如果分组列中具有NULL值，则NULL将作为一个分组返回。如果列中有多行NULL值，它们将分为一组。
+-- GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前。
+
+### 11.2 HAVING
+HAVING和WHERE的子句相似，但是WHERE过滤行，HAVING过滤分组
+```MYSQL
+SELECT XColumn, COUNT(*) AS XTitle FROM XTable GROUP BY XColumn HAVING COUNT(*) >= 2 /* 过滤COUNT(*) >= 2的那些分组 */
+```
+## 12. 使用子查询
+
+
+
+
+
+
+
 
 
 
