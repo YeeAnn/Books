@@ -151,7 +151,7 @@ SELECT Xcolumn, Upper(Ycolumn) AS Xtitle FROM Xtable /* 选取Xcolumn， Ycolumn
 |MIN()| 返回某列的最小值|
 |SUM()| 返回某列值之和|
 
--- `AVG()`
+- `AVG()`
 通过对表中的行数计数并计算特定列的值
 ```MYSQL
 SELECT AVG(Xcolumn) AS XTitle From XTables; /* 返回XTables中的XColumn的平均值，并且重命名为XTitle */
@@ -172,21 +172,49 @@ FROM XTables;   /*可以在一条语句中使用多个聚集函数*/
 ```MYSQL
 SELECT XColumn, COUNT(*) AS XTitle FROM XTable GROUP BY XColumn; /* 对每个XColumn值进行分组，计数，计数结果的列重命名为XTitle */
 ```
--- GROUP BY子句可以包含任意数目的列。这使得能对分组进行嵌套，为数据分组提供更细致的控制。
--- 如果在GROUP BY子句中嵌套了分组，数据将在最后规定的分组上进行汇总。换句话说，在建立分组时，指定的所有列都一起计算（所以不能从个别的列取回数据）。
--- GROUP BY子句中列出的每个列都必须是检索列或有效的表达式（但不能是聚集函数）。如果在SELECT中使用表达式，则必须在GROUP BY子句中指定相同的表达式。不能使用别名。
--- 除聚集计算语句外，SELECT语句中的每个列都必须在GROUP BY子句中给出。
--- 如果分组列中具有NULL值，则NULL将作为一个分组返回。如果列中有多行NULL值，它们将分为一组。
--- GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前。
+- GROUP BY子句可以包含任意数目的列。这使得能对分组进行嵌套，为数据分组提供更细致的控制。
+- 如果在GROUP BY子句中嵌套了分组，数据将在最后规定的分组上进行汇总。换句话说，在建立分组时，指定的所有列都一起计算（所以不能从个别的列取回数据）。
+- GROUP BY子句中列出的每个列都必须是检索列或有效的表达式（但不能是聚集函数）。如果在SELECT中使用表达式，则必须在GROUP BY子句中指定相同的表达式。不能使用别名。
+- 除聚集计算语句外，SELECT语句中的每个列都必须在GROUP BY子句中给出。
+- 如果分组列中具有NULL值，则NULL将作为一个分组返回。如果列中有多行NULL值，它们将分为一组。
+- GROUP BY子句必须出现在WHERE子句之后，ORDER BY子句之前。
 
 ### 11.2 HAVING
 HAVING和WHERE的子句相似，但是WHERE过滤行，HAVING过滤分组
 ```MYSQL
 SELECT XColumn, COUNT(*) AS XTitle FROM XTable GROUP BY XColumn HAVING COUNT(*) >= 2 /* 过滤COUNT(*) >= 2的那些分组 */
 ```
-## 12. 使用子查询
+## 12. 联结表
+关系数据库：各表通过某些列的关系相互关联。  
+主键：其值能够唯一区分表中每个行  
+外键：外键为某个表中的一列，它包含另一个表中的主键值，定义了两个表之间的关系  
+### 12.1 联结
+在数据库创建的时候没有可以指示MYSQL如何对各个表进行联结的东西，这种联结是程序员必须要清楚的内容。由没有联结关系的表关系返回的结果为笛卡尔积：第一个表中的行数乘以第二个表中的列数。  
+- 等值也称为内部联结，就是通过两张表中的某两个列的数值相等进行联结。内部联结方式的SQL语句有两种：
+```MYSQL
+SELECT XColumn, YColumn, ZColumn FROM Xtable, Ytable WHERE Xtable.xcolumn = Ytable.xcolumn ORDER BY Xcolumn, Ycolumn; /* 可以使用AND联结多个=号限定条件 */
+SELECT XColumn, YColumn, ZColumn FROM Xtable INNER JOIN Ytable ON Xtable.xcolumn = Ytable.xcolumn ORDER BY Xcolumn, Ycolumn; /* 作用同上一条语句，但是推荐使用这种 */
+```
+### 12.2 创建高级联结
+可以使用`AS`为列创建别名，并返回到客户机，但是也可以使用`AS`为表创建别名，创建的别名不返回客户机，但是可以使用在后续的语句中，用于减少拼写的难度
+```MYSQL
+SELECT Xcolumn, Ycolumn FROM Xtable AS X, Ytable AS Y WHERE X.column1 = Y.column1
+```
+- 自染联结：
+- 外部联结：
+- 使用带凝聚函数的联结：
+## 13. 组合查询
+多数SQL查询只包含从一个或者多个表中返回数据的单条SELECT语句。MYSQL也允许执行多个查询（多条select语句），并将结果作为单个查询结果集返回。这些组合查询查询同行成为并或者复合查询。   
+需要使用组合查询的两种情况
+- 在单个查询中从不同的表返回类似结构的数据
+- 对单个表执行多个查询，按单个查询返回数据
+`UNION`使用规则：  
+- UNION 必须由两条或者两条以上的SELECT语句组成，语句之间使用关键字UNION分隔；
+- UNION 中的每个查询必须包含相同的列，表达式或者聚集函数
+- 列数据类型必须兼容  
+在使用UNION的时候，会自动消除重复的行。如果不想消除重复的行就可以选择使用UNION ALL
 
-
+## 14.全文本搜索
 
 
 
