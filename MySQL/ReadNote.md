@@ -214,12 +214,41 @@ SELECT Xcolumn, Ycolumn FROM Xtable AS X, Ytable AS Y WHERE X.column1 = Y.column
 - 列数据类型必须兼容  
 在使用UNION的时候，会自动消除重复的行。如果不想消除重复的行就可以选择使用UNION ALL
 
-## 14.全文本搜索
+## 14. 全文本搜索
 
 
+## 15. 插入数据
+`Insert`
+### 15.1 插入完整的行
+Insert语句一般没有输出。
+```MYSQL
+INSERT INTO XTables VALUES(Value1, Value2, Value3...);
+INSERT INTO XTables(Column1, Column2, Column3...)  VALUES(Value1, Value2, Value3...);//推荐使用这种方式，即使表结构发生变化，这条语句也可以正确的工作
+```
+### 15.2 插入行的一部分
+可以使用上面的方式二，只要表允许某些行在插入数值时缺省并且给出默认值，就可以使用上述的语句插入行的一部分
+### 15.3 插入多行
+```MYSQL
+INSERT INTO XTables(Column1, Column2, Column3...)  VALUES(Value1, Value2, Value3...),(Value21, Value22, Value23...)
 
+```
+### 15.4 插入某些查询的结果
+```MYSQL
+INSERT INTO XTables(Column1, Column2, Column3...)  SELECT (Column1, Column2, Column3...) FROM YTables
 
+```
+## 16. 更新和删除数据
+### 16.1 更新`UPDATE`
+基本的UPDATE语句由三个部分组成：1.要更新的表；2.列名和它们的新值；3.确定要更新的过滤条件；例如：
+```MYSQL
+UPDATE XTables SET XColumn = 'Xvalue', YColumn = 'YValue' WHERE ZColumn = 'ZValue'
+```
+### 16.2 删除`DELETE`
+```MYSQL
+DELETE FROM XTables WHERE XColumn = `XValue`
+```
+如果UPDATE或者DELETE后面没有WHERE子句，将会影响表中的所有行。
 
-
+## 17. 创建和操纵表
 
 
