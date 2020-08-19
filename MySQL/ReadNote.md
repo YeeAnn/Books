@@ -270,10 +270,10 @@ PRIMARY KEY(Column1)
 
 `ALTER TABLE`之后必须要给出要更改的表名；所做更改的列表
 ```MYSQL
-ALTER TABLE XTable ADD Column1 CHAR(20);//增加一个列
-ALTER TABLE XTable DROP COLUMN Column1;//删除刚刚增加的列
-DROP TABLE XTable; //删除整张表
-RENAME TABLE XTabel TO YTable; //重命名整张表
+ALTER TABLE XTable ADD Column1 CHAR(20);/*增加一个列*/
+ALTER TABLE XTable DROP COLUMN Column1;/*删除刚刚增加的列*/
+DROP TABLE XTable; /*删除整张表*/
+RENAME TABLE XTabel TO YTable; /*重命名整张表*/
 
 ```
 外键？？？
@@ -292,38 +292,124 @@ RENAME TABLE XTabel TO YTable; //重命名整张表
 - 用DROP删除视图，其语法为DROP VIEW viewname
 - 更新视图时，可以先用DROP 再使用CREATE
 ```MYSQL
-CREATE VIEW XView AS SELECT column1, column2, column3 FROM table1, table2, table3 WHERE table1.column_x = table2.column_x AND table2.column_y = table3.column.y;//XView相当于后面这一大串SQL语句
+CREATE VIEW XView AS SELECT column1, column2, column3 FROM table1, table2, table3 WHERE table1.column_x = table2.column_x AND table2.column_y = table3.column.y;/*XView相当于后面这一大串SQL语句*/
 
 ```
 ## 19.使用存储过程
 存储过程简单来说就是为以后使用而保存的一条或者多条MYSQL语句的集合。可将其视为批文件，不过它们的作用不仅限于批处理。MYSQL称存储过程的执行为调用。因此MYSQL执行存储过程的语句为CALL。创建存储过程使用CREATE PROCEDURE
 ```MYSQL
-//创建存储过程
+/*创建存储过程*/
 CERATE PROCEDURE productpricing()
 BEGIN
  SELECT Avg(Columnx) AS name_x FROM Table_x;
 END
-//调用存储过程
+/*调用存储过程*/
 CALL productpricing();
-//删除存储过程
+/*删除存储过程*/
 DROP PROCEDURE productpricing();
-//带参数
-//关键字：OUT: 从存储过程返回一个值给使用者
-//        IN: 传入一个值给存储过程
-//        INOUT
-//通过INTO将值写入相关变量
+/*带参数
+关键字：OUT: 从存储过程返回一个值给使用者
+        IN: 传入一个值给存储过程
+        INOUT
+通过INTO将值写入相关变量*/
 CERATE PROCEDURE productpricing(OUT p1 DECIMAL(8, 2), OUT p2 DECIMAL(8, 2), OUT p3 DECIMAL(8, 2))
 BEGIN
  SELCET MIN(Column1) INTO p1 FROM Table_1;
  SELECT Max(Column2) INTO p2 FROM Table_2;
  SELECT Avg(Columnx) INTO p3 FROM Table_x;
 END
-//带变量的调用,所有MYSQL的变量都必须以@开头
+/*带变量的调用,所有MYSQL的变量都必须以@开头*/
 CALL productpricing(@p1, @p2, @p3);
 ```
 DECLARE: 定义变量，指定变量名和数据类型
 
 ## 20. 使用游标
+有时需要在检索出来的行中前进或者后退一行或者多行，这就是使用游标的原因。
+使用游标的几个步骤：
+- 声明（定义）游标
+- 打开游标
+- 对于填有数据的游标，根据需要取出（检索）各行
+- 结束游标使用时，需要关闭游标
+```MYSQL
+\*case -- 1*\
+\*定义游标*\
+CREATE PROCEDURE processorders()
+BEGIN
+  DECLARE ordernumbers CURSOR
+  FOR
+  SELECT column1 FROM table1;
+END
+\*打开游标，在执行OPEN语句时执行查询，存储检索出的数据以供浏览和滚动*\
+OPEN ordernumbers;
+\*关闭游标,如果没有 明确关闭游标，在到达END语句时会自动关闭它*\
+CLOSE ordernumbers;
+
+\*case -- 2*\
+CREATE PROCEDURE processorders()
+BEGIN
+  -- Declare local variables
+  DECLARE o INT
+  
+  -- Declare the cursor
+  DECLARE ordernumbers CURSOR
+  FOR
+  SELECT column1 FROM table1;
+  
+  -- Open the cursor
+  OPEN ordernumbers;
+  
+  -- Get order number
+  FETCH ordernumbers INTO o;
+  
+  -- Close the cursor
+  CLOSE ordernumbers;
+END
+```
+## 21. 使用触发器
+触发器是MYSQL响应DELETE, INSERT, UPDATE而自动执行的一条MYSQL语句。触发器按照每个表中每个事件进行定义，每个表中每个事件只允许定义一个触发器。因此，每个表最多支持6个触发器。  
+创建触发器：
+- 唯一的触发器名
+- 触发器关联的表
+- 触发器应该响应的活动（DELETE, INSERT, UPDATE）
+- 触发器何时执行
+```MYSQL
+\*创建触发器*\
+CREATE TRIGGER newproduct AFTER INSERT ON products FOR EACH ROW SELECT 'Product added';
+\*删除触发器*\
+DROP TRIGGER newproduct;
+```
+## 22.管理事务处理
+事务处理是一种机制，用来管理必须成批执行的MYSQL操作，以保证数据库不包含不完整的操作结果。利用事务处理，可以保证一组操作不会中途停止，它们或者作为整体执行，或者完全不执行。管理事务处理关键在于将SQL语句分解为逻辑块，明确规定数据何时应该回退，何时不应该回退。
+相关术语：
+- 事务： transaction： 值一组SQL语句
+- 回退： rollback撤销指定SQL语句的过程
+- 提交：commit值将未存储的SQL语句结果写入数据表中。一般的MYSQL语句都是直接针对数据库表执行和编写的，隐含提交过程（即自动进行的），但是在事务处理块中，提交不会隐含的进行，为进行明确的提交，需要使用COMMIT语句。
+- 保留点： savepoint：值事务处理中设置的临时占位符，可以对它发布回退
+``MYSQL
+/* case - 1 */
+SELECT * FROM ordertotals;
+START TRANSACTION;-- 开始事务
+DELETE FROM ordertotals;
+ROLLBACK;--撤销MySQL语句
+SELECT * FROM ordertotals;
+
+/* case - 2 */
+START TRANSACTION;
+DELETE FORM tables1 WHERE column1 = value1;
+DELETE FROM tables2 WHERE column2 = value2;
+COMMIT; -- 仅仅只有在执行到这句的时候，上述的操作才完成
+```
+对于简单的事务处理，使用COMMIT和ROLLBACK记忆可以写入或者撤销整个事务处理。在复杂的SQL操作的时候，可能需要部分提交或者回退，为了支持部分事务处理，必须能在事务处理快中合适的位置放置占位符，这样，如果需要回退，可以回退到某个占位符。
+```MYSQL
+SAVEPOINT delete1；
+......
+ROOLBACK TO delete1;
+```
+
+## 23. 全球化和本地化
+
+
+
 
 
 
