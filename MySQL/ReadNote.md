@@ -250,5 +250,83 @@ DELETE FROM XTables WHERE XColumn = `XValue`
 如果UPDATE或者DELETE后面没有WHERE子句，将会影响表中的所有行。
 
 ## 17. 创建和操纵表
+`CREATE TABLE`之后必须给出：新表的名字；表列的名字和定义（用逗号分隔）
+```MYSQL
+CREATE TABLE XTables
+(
+Column1  int       NOT NULL AUTO_INCREMENT,
+Column2  char(50)  NOT NULL,
+Column3  char(50)  NULL,
+Column4  int       NOT NULL DEFAULT 1,
+PRIMARY KEY(Column1)
+)ENGINE=InnoDB;
+
+```
+- NULL值就是没有值或者缺值。允许NULL值的列也允许在插入行的时候不给出该列的值。不允许NULL值的列在插入或者更新的时候，该列必须有值
+- 如果需要创建多个列组成主键，应该以逗号分隔的列表给出各列名，`PRIMARY KEY(Column1, Column2)`.主键可以在创建表的时候定义，也可以在创建表之后定义
+- 每个表只允许一个AUTO_INCREMENT列，而且它必须被索引
+- 给改列增加一个DEFAULT修饰词，表示该列的默认值
+- 如果省略最后选择引擎的语句表示使用默认的引擎
+
+`ALTER TABLE`之后必须要给出要更改的表名；所做更改的列表
+```MYSQL
+ALTER TABLE XTable ADD Column1 CHAR(20);//增加一个列
+ALTER TABLE XTable DROP COLUMN Column1;//删除刚刚增加的列
+DROP TABLE XTable; //删除整张表
+RENAME TABLE XTabel TO YTable; //重命名整张表
+
+```
+外键？？？
+
+## 18. 使用视图
+视图是虚拟的表，与包含数据的表不一样，视图只包含使用时动态检索数据的查询。  
+视图的作用：
+- 重用SQL语句
+- 简化复杂的SQL操作，在编写查询之后，可以方便的重用它而不必知道它的基本查询细节
+- 使用表的组成部分而不是整个表
+- 保护数据。可以给用户授予表的特定部分的访问权限而不是整个表的访问权限
+- 更改数据格式和表示。视图可返回与底层表的表示和格式不同的数据  
+使用视图：
+- 视图使用CREATE VIEW来创建
+- 使用SHOW CREATE VIEW viewname来查看视图的语句
+- 用DROP删除视图，其语法为DROP VIEW viewname
+- 更新视图时，可以先用DROP 再使用CREATE
+```MYSQL
+CREATE VIEW XView AS SELECT column1, column2, column3 FROM table1, table2, table3 WHERE table1.column_x = table2.column_x AND table2.column_y = table3.column.y;//XView相当于后面这一大串SQL语句
+
+```
+## 19.使用存储过程
+存储过程简单来说就是为以后使用而保存的一条或者多条MYSQL语句的集合。可将其视为批文件，不过它们的作用不仅限于批处理。MYSQL称存储过程的执行为调用。因此MYSQL执行存储过程的语句为CALL。创建存储过程使用CREATE PROCEDURE
+```MYSQL
+//创建存储过程
+CERATE PROCEDURE productpricing()
+BEGIN
+ SELECT Avg(Columnx) AS name_x FROM Table_x;
+END
+//调用存储过程
+CALL productpricing();
+//删除存储过程
+DROP PROCEDURE productpricing();
+//带参数
+//关键字：OUT: 从存储过程返回一个值给使用者
+//        IN: 传入一个值给存储过程
+//        INOUT
+//通过INTO将值写入相关变量
+CERATE PROCEDURE productpricing(OUT p1 DECIMAL(8, 2), OUT p2 DECIMAL(8, 2), OUT p3 DECIMAL(8, 2))
+BEGIN
+ SELCET MIN(Column1) INTO p1 FROM Table_1;
+ SELECT Max(Column2) INTO p2 FROM Table_2;
+ SELECT Avg(Columnx) INTO p3 FROM Table_x;
+END
+//带变量的调用,所有MYSQL的变量都必须以@开头
+CALL productpricing(@p1, @p2, @p3);
+```
+DECLARE: 定义变量，指定变量名和数据类型
+
+## 20. 使用游标
+
+
+
+
 
 
