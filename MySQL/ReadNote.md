@@ -385,7 +385,7 @@ DROP TRIGGER newproduct;
 - 回退： rollback撤销指定SQL语句的过程
 - 提交：commit值将未存储的SQL语句结果写入数据表中。一般的MYSQL语句都是直接针对数据库表执行和编写的，隐含提交过程（即自动进行的），但是在事务处理块中，提交不会隐含的进行，为进行明确的提交，需要使用COMMIT语句。
 - 保留点： savepoint：值事务处理中设置的临时占位符，可以对它发布回退
-``MYSQL
+```MYSQL
 /* case - 1 */
 SELECT * FROM ordertotals;
 START TRANSACTION;-- 开始事务
