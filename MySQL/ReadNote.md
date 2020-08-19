@@ -223,7 +223,7 @@ SELECT Xcolumn, Ycolumn FROM Xtable AS X, Ytable AS Y WHERE X.column1 = Y.column
 Insert语句一般没有输出。
 ```MYSQL
 INSERT INTO XTables VALUES(Value1, Value2, Value3...);
-INSERT INTO XTables(Column1, Column2, Column3...)  VALUES(Value1, Value2, Value3...);//推荐使用这种方式，即使表结构发生变化，这条语句也可以正确的工作
+INSERT INTO XTables(Column1, Column2, Column3...)  VALUES(Value1, Value2, Value3...);/*推荐使用这种方式，即使表结构发生变化，这条语句也可以正确的工作*/
 ```
 ### 15.2 插入行的一部分
 可以使用上面的方式二，只要表允许某些行在插入数值时缺省并且给出默认值，就可以使用上述的语句插入行的一部分
@@ -331,20 +331,20 @@ DECLARE: 定义变量，指定变量名和数据类型
 - 对于填有数据的游标，根据需要取出（检索）各行
 - 结束游标使用时，需要关闭游标
 ```MYSQL
-\*case -- 1*\
-\*定义游标*\
+/*case -- 1*/
+/*定义游标*/
 CREATE PROCEDURE processorders()
 BEGIN
   DECLARE ordernumbers CURSOR
   FOR
   SELECT column1 FROM table1;
 END
-\*打开游标，在执行OPEN语句时执行查询，存储检索出的数据以供浏览和滚动*\
+/*打开游标，在执行OPEN语句时执行查询，存储检索出的数据以供浏览和滚动*/
 OPEN ordernumbers;
-\*关闭游标,如果没有 明确关闭游标，在到达END语句时会自动关闭它*\
+/*关闭游标,如果没有 明确关闭游标，在到达END语句时会自动关闭它*/
 CLOSE ordernumbers;
 
-\*case -- 2*\
+/*case -- 2*/
 CREATE PROCEDURE processorders()
 BEGIN
   -- Declare local variables
@@ -373,9 +373,9 @@ END
 - 触发器应该响应的活动（DELETE, INSERT, UPDATE）
 - 触发器何时执行
 ```MYSQL
-\*创建触发器*\
+/*创建触发器*/
 CREATE TRIGGER newproduct AFTER INSERT ON products FOR EACH ROW SELECT 'Product added';
-\*删除触发器*\
+/*删除触发器*/
 DROP TRIGGER newproduct;
 ```
 ## 22.管理事务处理
