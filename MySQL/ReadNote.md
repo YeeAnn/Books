@@ -395,7 +395,7 @@ SELECT * FROM ordertotals;
 
 /* case - 2 */
 START TRANSACTION;
-DELETE FORM tables1 WHERE column1 = value1;
+DELETE FROM tables1 WHERE column1 = value1;
 DELETE FROM tables2 WHERE column2 = value2;
 COMMIT; -- 仅仅只有在执行到这句的时候，上述的操作才完成
 ```
