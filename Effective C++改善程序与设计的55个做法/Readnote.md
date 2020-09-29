@@ -65,7 +65,7 @@ polymorphic（带多态性质的）base class 应该声明一个virtual析构函
 classes的设计目的如果不是为了作为base class使用，或者不是为了具备多态性（polymorphically）,就不应该声明virtual析构函数。（*因为会增加对象的体积大小*）  
 虚函数表：属于类。不同的编译环境存放的位置不同  
 虚指针：属于每个对象，指向虚函数表  
-参考链接： https://blog.csdn.net/qq_28584889/article/details/88756022
+参考链接： https://blog.csdn.net/qq_28584889/article/details/88756022       
 基类的析构函数定义成virtual的原因：https://blog.csdn.net/weicao1990/article/details/81911341
 
 # 8. 别让异常逃离析构函数
