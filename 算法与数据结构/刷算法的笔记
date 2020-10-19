@@ -1,0 +1,1 @@
+1. stack 或者 queue 或者 list 或者 string等具备堆栈性质的存储结构，在pop之前需要判断其是否为空
