@@ -1,13 +1,8 @@
-1. stack 或者 queue 或者 list 或者 string等具备堆栈性质的存储结构，在pop之前需要判断其是否为空
-
-
-2. 链表：
-143：+ 19 + 2： 可以重新解决143
-
-
-# 1. 贪心算法
-参考链接： https://zhuanlan.zhihu.com/p/53334049  
-
-Leetcode合集：https://leetcode-cn.com/tag/greedy/  
-
-
+1. 可参考的刷题线路：
+  知乎上的帖子：
+  https://zhuanlan.zhihu.com/p/297648394?utm_source=wechat_session&utm_medium=social&utm_oi=51912212742144
+  LeetCode上的地址：
+  https://github.com/changgyhub/leetcode_101
+  
+  关于二叉树的讲解：
+  funcking - algorithm的帖子可以参考去刷
