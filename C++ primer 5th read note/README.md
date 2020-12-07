@@ -4,3 +4,8 @@
 4. 比较好的C++基本语法练习小项目：
   - https://www.hackerrank.com/challenges/attribute-parser/problem
   
+C++零散语法：
+# 1. Lambda表达式
+https://www.cnblogs.com/jimodetiantang/p/9016826.html
+
+  
