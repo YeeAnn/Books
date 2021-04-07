@@ -13,3 +13,6 @@ hello there, this is a new guy who want to learn something about C++, maybe abou
   
  - github grammer:
  https://help.github.com/cn/github/writing-on-github/basic-writing-and-formatting-syntax
+ 
+ - 推荐书籍
+ https://wdxtub.com/work/
