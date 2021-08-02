@@ -16,3 +16,8 @@ hello there, this is a new guy who want to learn something about C++, maybe abou
  
  - 推荐书籍
  https://wdxtub.com/work/
+ 
+ - Youtube Links
+ 1. C++:
+    https://www.youtube.com/watch?v=1OsGXuNA5cc&list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&index=2
+    
