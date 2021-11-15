@@ -191,3 +191,9 @@ public class Derived<T>:Base<string>
     - try: 程序的正常操作部分
     - catch: 包含代码处理的各种错误情况
     - finally: 代码资源清理或者需要在try和catch之后执行的操作。==无论是否抛出异常，都会执行finally块。如果在finally块中放置return语句，编译器会报错==
+
+  
+  # chap17 异步编程
+  ## 17.1 `Async`和`await`
+  ref: https://zetcode.com/csharp/async-await/
+  `Async`会一直执行，直到遇见一个`await`运算符，遇见`await`运算符时，整个task会挂起等待`await`完成，整个call函数会返回并且继续工作。
