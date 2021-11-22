@@ -21,3 +21,5 @@ hello there, this is a new guy who want to learn something about C++, maybe abou
  1. C++:
     https://www.youtube.com/watch?v=1OsGXuNA5cc&list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&index=2
     
+ [现代C++教程，高速上手C++11，14，17，20](https://changkun.de/modern-cpp/zh-cn/02-usability/index.html)
+    
