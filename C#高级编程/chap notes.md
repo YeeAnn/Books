@@ -1,4 +1,8 @@
-# chpa2 核心C#
+# 1.C# Books reference
+ [C#编程指南中文版](https://docs.microsoft.com/zh-cn/dotnet/csharp/async)  
+
+# 2.C# 基本语法 
+## chpa2 核心C#
   1. C# 中变量未初始化会当成一个错误来对待
   - 变量位于类或结构中，未显示初始化，创建这些变量时，默认的值就是0
   - 局部变量必须显示初始化
@@ -22,7 +26,7 @@
   5. `foreach`
   - `foreach(var in vararry)`
 
-# chap3 对象和类型
+## chap3 对象和类型
 1. 属性
 2. 类 & 结构
   - 类
@@ -34,7 +38,7 @@
   `partial`，将`partial`放在`class`，`struct`，`interface`前面
 5. 静态类
 
-# chap4 继承
+## chap4 继承
 1.  C#不支持私有继承，因此不需要在基类名字前面加上`public`或者`private`
 
 2.  虚函数：
@@ -73,7 +77,7 @@
 - 枚举类型成员默认为public访问修饰符，且不能显示使用修饰符
 - 结构成员默认为private修饰符
 
-# chap5 泛型
+## chap5 泛型
 1. 与C++的区别：
   对于C++而言，模板在实例化的时候，需要模板的源代码，但是泛型在C#中是一种内置的结构
 2. 泛型类型可以实现泛型接口，也可以派生自一个类。但要求必须要重复接口的泛型类型或者必须指定基类的类型：
@@ -93,7 +97,7 @@ public class Derived<T>:Base<string>
 3. 静态成员：
  泛型类的静态成员只能在类的一个实例中共享
  
- # chap6 数组
+ ## chap6 数组
  1. Array 类
   (1)CreateInstance()创建数组
   (2)SetValue()\GetValue()
@@ -110,7 +114,7 @@ public class Derived<T>:Base<string>
 
 3. 元组Tuple
 
-# chap7 运算符和类型强制转换
+## chap7 运算符和类型强制转换
 1. checked & unchecked运算符：
   要不要执行类型检查
   
@@ -126,7 +130,7 @@ public class Derived<T>:Base<string>
 5. 空合并运算符：
   ??
   
-# chap8 委托，lambda表达式和事件
+## chap8 委托，lambda表达式和事件
 1. 委托
 (1)定义：
   `delegate`： `delegate void IntMethodInvoker(int x)`
@@ -160,12 +164,12 @@ public class Derived<T>:Base<string>
   - EventHandler<TEventArgs>:  事件委托，第一个参数必须是object类型，第二个参数是T类型，且T必须派生自基类EventArgs
   - 对于事件，可以使用add和remove关键字添加和删除委托的处理程序
   
-# chap9 字符串和正则表达式
+## chap9 字符串和正则表达式
 
-# chap10 集合
+## chap10 集合
   数组和Array类在定义时大小是固定的，如果元素的个数是动态的，应该使用集合类。List<T>,队列，栈，链表，字典和集
 
-# chap14 内存管理和指针
+## chap14 内存管理和指针
 1. 垃圾回收器回收的资源：
 2. 释放非托管的资源：
   - 非托管资源：例如文件句柄，网络连接，数据库链接等
@@ -174,7 +178,7 @@ public class Derived<T>:Base<string>
     - 在类中实现System.IDisposable接口
 
 
-# chap15 反射
+## chap15 反射
 反射是一个术语，描述了在运行过程中检查和处理程序元素的功能。
  反射允许完成以下的任务：
  - 枚举类型的成员
@@ -186,14 +190,145 @@ public class Derived<T>:Base<string>
  - 创建和编译新程序集
  
  
- # chap16 错误和异常
+ ## chap16 错误和异常
  1. 一般将程序的相关部分分成3中不同类型的操作：
     - try: 程序的正常操作部分
     - catch: 包含代码处理的各种错误情况
-    - finally: 代码资源清理或者需要在try和catch之后执行的操作。==无论是否抛出异常，都会执行finally块。如果在finally块中放置return语句，编译器会报错==
+    - finally: 代码资源清理或者需要在try和catch之后执行的操作。**无论是否抛出异常，都会执行finally块。如果在finally块中放置return语句，编译器会报错**
 
   
-  # chap17 异步编程
-  ## 17.1 `Async`和`await`
-  ref: https://zetcode.com/csharp/async-await/
-  `Async`会一直执行，直到遇见一个`await`运算符，遇见`await`运算符时，整个task会挂起等待`await`完成，整个call函数会返回并且继续工作。
+  ## chap17 异步编程
+  ### 17.1 `Async`和`await`
+  ref: https://zetcode.com/csharp/async-await/  
+  [C#编程指南中文版](https://docs.microsoft.com/zh-cn/dotnet/csharp/async)  
+  #### 概述
+  1. `Async`会一直执行，直到遇见一个`await`运算符，遇见`await`运算符时，整个task会挂起等待`await`完成，整个call函数会返回并且继续工作。`Async`修饰符会向编译器发出信号，该方法中包含`await`语句。  也同样暗示编译器这是异步操作。
+  2. 异步代码可用于IO绑定和CPU绑定，在每个方案中有所不同；
+    2.1 如果代码需要等待某些内容，比如数据库中的数据，则为IO绑定；
+    2.2 如果代码需要进行开销巨大的计算，则为CPU绑定；
+  3. 异步代码使用`Task<T>`或者`Task`，它们是对后台所完成的工作建模的结构
+  4. `async`关键字将方法转换成异步方法，使得在正文中可以使用`await`关键字
+  5. 应用`await`关键字之后，将挂起被调用的方法，并将控制权还给调用方，等待直到任务完成
+  6. 仅允许在异步方法中使用`await`关键字
+  7. `await Task.WhenAll(Task1, Task2, Task3)`它将返回一个其参数列表中的所有任务都已完成时才完成的 Task  
+  8. `await Task.WhenAny(TaskList)`当其中一个task完成了该函数都会返回，可以处理这个返回的结果，并将这个task从传给`WhenAll`的TaskList中删除
+  9. 添加`Async`作为编写每个异步方法名称的后缀
+  ```C#
+  using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace AsyncBreakfast
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            Coffee cup = PourCoffee();
+            Console.WriteLine("coffee is ready");
+
+            var eggsTask = FryEggsAsync(2);
+            var baconTask = FryBaconAsync(3);
+            var toastTask = MakeToastWithButterAndJamAsync(2);
+
+            var breakfastTasks = new List<Task> { eggsTask, baconTask, toastTask };
+            while (breakfastTasks.Count > 0)
+            {
+                Task finishedTask = await Task.WhenAny(breakfastTasks);
+                if (finishedTask == eggsTask)
+                {
+                    Console.WriteLine("eggs are ready");
+                }
+                else if (finishedTask == baconTask)
+                {
+                    Console.WriteLine("bacon is ready");
+                }
+                else if (finishedTask == toastTask)
+                {
+                    Console.WriteLine("toast is ready");
+                }
+                breakfastTasks.Remove(finishedTask);
+            }
+
+            Juice oj = PourOJ();
+            Console.WriteLine("oj is ready");
+            Console.WriteLine("Breakfast is ready!");
+        }
+
+        static async Task<Toast> MakeToastWithButterAndJamAsync(int number)
+        {
+            var toast = await ToastBreadAsync(number);
+            ApplyButter(toast);
+            ApplyJam(toast);
+
+            return toast;
+        }
+
+        private static Juice PourOJ()
+        {
+            Console.WriteLine("Pouring orange juice");
+            return new Juice();
+        }
+
+        private static void ApplyJam(Toast toast) =>
+            Console.WriteLine("Putting jam on the toast");
+
+        private static void ApplyButter(Toast toast) =>
+            Console.WriteLine("Putting butter on the toast");
+
+        private static async Task<Toast> ToastBreadAsync(int slices)
+        {
+            for (int slice = 0; slice < slices; slice++)
+            {
+                Console.WriteLine("Putting a slice of bread in the toaster");
+            }
+            Console.WriteLine("Start toasting...");
+            await Task.Delay(3000);
+            Console.WriteLine("Remove toast from toaster");
+
+            return new Toast();
+        }
+
+        private static async Task<Bacon> FryBaconAsync(int slices)
+        {
+            Console.WriteLine($"putting {slices} slices of bacon in the pan");
+            Console.WriteLine("cooking first side of bacon...");
+            await Task.Delay(3000);
+            for (int slice = 0; slice < slices; slice++)
+            {
+                Console.WriteLine("flipping a slice of bacon");
+            }
+            Console.WriteLine("cooking the second side of bacon...");
+            await Task.Delay(3000);
+            Console.WriteLine("Put bacon on plate");
+
+            return new Bacon();
+        }
+
+        private static async Task<Egg> FryEggsAsync(int howMany)
+        {
+            Console.WriteLine("Warming the egg pan...");
+            await Task.Delay(3000);
+            Console.WriteLine($"cracking {howMany} eggs");
+            Console.WriteLine("cooking the eggs ...");
+            await Task.Delay(3000);
+            Console.WriteLine("Put eggs on plate");
+            
+            return new Egg();
+        }
+
+        private static Coffee PourCoffee()
+        {
+            Console.WriteLine("Pouring coffee");
+            return new Coffee();
+        }
+    }
+}
+  ```
+  ####  取消task
+  cancel  
+  CancelAfter
+  
+  ####  
+  
+  
