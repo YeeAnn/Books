@@ -6,6 +6,7 @@
   
 C++零散语法：
 # 1. Lambda表达式
-https://www.cnblogs.com/jimodetiantang/p/9016826.html
+https://www.cnblogs.com/jimodetiantang/p/9016826.html   
+[C++11 lambda表达式精讲](http://c.biancheng.net/view/3741.html)
 
   
